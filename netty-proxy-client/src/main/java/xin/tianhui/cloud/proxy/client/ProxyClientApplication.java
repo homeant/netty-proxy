@@ -1,4 +1,4 @@
-package tianhui.xin.cloud.proxy.client;
+package xin.tianhui.cloud.proxy.client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
