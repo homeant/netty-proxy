@@ -1,0 +1,6 @@
+{
+  "properties": [{
+    "name":"netty",
+    "sourceType": "xin.tianhui.cloud.netty.NettyProperties"
+  }]
+}

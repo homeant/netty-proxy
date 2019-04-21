@@ -10,9 +10,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "netty")
 public class NettyProperties {
 
-    private int prop;
+    private int prop=18001;
 
-    private boolean keepAlive = true;
+    private boolean soKeepAlive = true;
 
-    private int backlog;
+    private int soBacklog;
+
+    private int bossThreadCount = 2;
+
+    private int workerThreadCount = 2;
 }

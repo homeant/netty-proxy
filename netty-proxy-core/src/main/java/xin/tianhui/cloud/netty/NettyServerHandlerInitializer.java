@@ -7,10 +7,12 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class NettyServerHandlerInitializer extends ChannelInitializer<SocketChannel> {
 
     private final StringDecoder stringDecoder;
@@ -26,4 +28,6 @@ public class NettyServerHandlerInitializer extends ChannelInitializer<SocketChan
         channelHandlers.forEach(r -> pipeline.addLast(r));
         pipeline.addLast("encoder", stringEncoder);
     }
+
+
 }

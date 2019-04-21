@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  xin.tianhui.cloud.netty.NettyAutoConfiguration

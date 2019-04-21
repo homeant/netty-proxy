@@ -1,3 +1,9 @@
 logging:
   file:
     name: ./logs/client.log
+  level:
+    xin:
+      tianhui:
+        cloud: DEBUG
+netty:
+  prop: 18001
