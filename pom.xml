@@ -7,7 +7,7 @@
 		<module>netty-proxy-core</module>
 	</modules>
 
-	<groupId>tianhui.xin.cloud</groupId>
+	<groupId>xin.tianhui.cloud</groupId>
 	<artifactId>netty-proxy</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
