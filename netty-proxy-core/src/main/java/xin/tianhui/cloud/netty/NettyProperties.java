@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "netty")
 public class NettyProperties {
 
-    private int prop=18001;
+    private int port=1080;
 
     private boolean soKeepAlive = true;
 

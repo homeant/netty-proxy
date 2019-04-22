@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
 import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +23,6 @@ import java.util.Set;
 @Slf4j
 @EnableConfigurationProperties(NettyProperties.class)
 public class NettyAutoConfiguration {
-
     @Autowired
     private NettyProperties properties;
 
@@ -55,7 +53,7 @@ public class NettyAutoConfiguration {
 
     @Bean(name = "tcpSocketAddress")
     public InetSocketAddress tcpPort() {
-        return new InetSocketAddress(properties.getProp());
+        return new InetSocketAddress(properties.getPort());
     }
 
     @Bean(name = "tcpChannelOptions")
@@ -67,20 +65,7 @@ public class NettyAutoConfiguration {
     }
 
     @Bean
-    public NettyServerApplication nettyServerApplication(){
-        return new NettyServerApplication();
-    }
-
-
-
-    /*@Bean
-    public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }*/
-
-    /*@Bean
     public ServerBootstrap serverBootstrap(ChannelInitializer channelInitializer) {
-        log.debug("netty start ...");
         ServerBootstrap b = new ServerBootstrap();
         b.group(bossGroup(), workerGroup())
                 .channel(NioServerSocketChannel.class)
@@ -91,6 +76,11 @@ public class NettyAutoConfiguration {
             b.option(option, tcpChannelOptions.get(option));
         }
         return b;
-    }*/
+    }
+
+    @Bean
+    public NettyServerApplication serverApplication(){
+        return new NettyServerApplication();
+    }
 
 }

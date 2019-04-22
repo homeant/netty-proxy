@@ -1,33 +1,34 @@
 package xin.tianhui.cloud.netty;
 
+import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelFuture;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.SmartApplicationListener;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.net.InetSocketAddress;
 
 @Slf4j
-public class NettyServerApplication implements SmartApplicationListener {
-    @Override
-    public boolean supportsEventType(Class<? extends ApplicationEvent> aClass) {
-        log.debug("class:{}",aClass);
-        return aClass == ContextRefreshedEvent.class;
+public class NettyServerApplication {
+
+    @Autowired
+    ServerBootstrap serverBootstrap;
+
+    @Autowired
+    InetSocketAddress inetSocketAddress;
+
+    private ChannelFuture channelFuture;
+
+    @PostConstruct
+    public void start() throws Exception{
+        log.debug("netty start");
+        channelFuture = serverBootstrap.bind(inetSocketAddress).sync();
     }
 
-    @Override
-    public boolean supportsSourceType(Class<?> sourceType) {
-        return ApplicationContext.class.isAssignableFrom(sourceType);
-    }
-
-    @Override
-    public void onApplicationEvent(ApplicationEvent applicationEvent) {
-        log.debug("{}",applicationEvent.getSource());
-    }
-
-
-
-    @Override
-    public int getOrder() {
-        return 100;
+    @PreDestroy
+    public void destroy() throws Exception{
+        log.debug("netty destroy");
+        channelFuture.channel().closeFuture().sync();
     }
 }
