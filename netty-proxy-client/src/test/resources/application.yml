@@ -1,0 +1,10 @@
+logging:
+  file:
+    name: ./logs/client.log
+  level:
+    fun:
+      vyse:
+        cloud: DEBUG
+netty:
+  enabled: true
+  port: 1081

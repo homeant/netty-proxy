@@ -1,6 +1,7 @@
 package fun.vyse.cloud.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +14,23 @@ import java.net.InetSocketAddress;
 public class NettyServerApplication {
 
     @Autowired
-    ServerBootstrap serverBootstrap;
+    private ServerBootstrap serverBootstrap;
 
     @Autowired
-    InetSocketAddress inetSocketAddress;
+    private InetSocketAddress inetSocketAddress;
 
-    private ChannelFuture channelFuture;
+    private Channel serverChannel;
 
     @PostConstruct
     public void start() throws Exception{
-        log.debug("netty start");
-        channelFuture = serverBootstrap.bind(inetSocketAddress).sync();
+        log.debug("netty start ....");
+        serverChannel = serverBootstrap.bind(inetSocketAddress).sync().channel().closeFuture().sync().channel();
     }
 
     @PreDestroy
-    public void destroy() throws Exception{
-        log.debug("netty destroy");
-        channelFuture.channel().closeFuture().sync();
+    public void destroy() {
+        log.debug("netty destroy ....");
+        serverChannel.close();
+        serverChannel.parent().close();
     }
 }

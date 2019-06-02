@@ -4,29 +4,29 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.socks.SocksInitRequestDecoder;
+import io.netty.handler.codec.socks.SocksMessageEncoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
 @Data
+@Slf4j
 @EqualsAndHashCode(callSuper = false)
-public class NettyServerHandlerInitializer extends ChannelInitializer<SocketChannel> {
-
-    private final StringDecoder stringDecoder;
-
-    private final StringEncoder stringEncoder;
+public class SocksServerInitializer extends ChannelInitializer<SocketChannel> {
 
     private final List<ChannelHandler> channelHandlers;
 
     @Override
-    protected void initChannel(SocketChannel socketChannel) throws Exception {
+    public void initChannel(SocketChannel socketChannel) {
         ChannelPipeline pipeline = socketChannel.pipeline();
-        pipeline.addLast("decoder", stringDecoder);
+        pipeline.addLast(new SocksInitRequestDecoder());
+        pipeline.addLast(new SocksMessageEncoder());
         channelHandlers.forEach(r -> pipeline.addLast(r));
-        pipeline.addLast("encoder", stringEncoder);
     }
 
 
