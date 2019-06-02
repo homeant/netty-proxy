@@ -1,4 +1,4 @@
-package xin.tianhui.cloud.netty;
+package fun.vyse.cloud.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

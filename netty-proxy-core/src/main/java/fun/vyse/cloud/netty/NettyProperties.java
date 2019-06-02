@@ -1,4 +1,4 @@
-package xin.tianhui.cloud.netty;
+package fun.vyse.cloud.netty;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

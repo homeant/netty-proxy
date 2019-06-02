@@ -1,4 +1,4 @@
-package xin.tianhui.cloud.proxy.client.web;
+package fun.vyse.cloud.proxy.client.web;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

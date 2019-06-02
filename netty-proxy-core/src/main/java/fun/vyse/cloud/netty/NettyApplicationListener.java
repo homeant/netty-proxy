@@ -1,4 +1,4 @@
-package xin.tianhui.cloud.netty;
+package fun.vyse.cloud.netty;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;

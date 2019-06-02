@@ -5,9 +5,10 @@
 	<modules>
 		<module>netty-proxy-client</module>
 		<module>netty-proxy-core</module>
+		<module>netty-proxy-service</module>
 	</modules>
 
-	<groupId>xin.tianhui.cloud</groupId>
+	<groupId>fun.vyse.cloud</groupId>
 	<artifactId>netty-proxy</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>

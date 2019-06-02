@@ -1,4 +1,4 @@
-package xin.tianhui.cloud.proxy.client;
+package fun.vyse.cloud.proxy.client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package xin.tianhui.cloud.netty;
+package fun.vyse.cloud.netty;
 
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;

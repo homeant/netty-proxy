@@ -1,5 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  xin.tianhui.cloud.netty.NettyAutoConfiguration
+  fun.vyse.cloud.netty.NettyAutoConfiguration
 
 org.springframework.context.ApplicationListener=\
-  xin.tianhui.cloud.netty.NettyApplicationListener
+  fun.vyse.cloud.netty.NettyApplicationListener
