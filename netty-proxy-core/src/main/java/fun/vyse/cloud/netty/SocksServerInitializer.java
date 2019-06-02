@@ -23,9 +23,9 @@ public class SocksServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     public void initChannel(SocketChannel socketChannel) {
-        ChannelPipeline pipeline = socketChannel.pipeline();
-        pipeline.addLast(new SocksInitRequestDecoder());
-        pipeline.addLast(new SocksMessageEncoder());
+        ChannelPipeline pipeline = socketChannel.pipeline()
+                .addLast(new SocksInitRequestDecoder())
+                .addLast(new SocksMessageEncoder());
         channelHandlers.forEach(r -> pipeline.addLast(r));
     }
 

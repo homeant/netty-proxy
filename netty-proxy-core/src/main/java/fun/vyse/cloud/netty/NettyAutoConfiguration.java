@@ -15,10 +15,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import java.net.InetSocketAddress;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 @Slf4j
 @ConditionalOnProperty(name = "netty.enabled", havingValue = "true")
@@ -31,7 +28,7 @@ public class NettyAutoConfiguration {
         this.properties = nettyProperties;
     }
 
-    /*@Bean
+    @Bean
     public StringEncoder stringEncoder() {
         return new StringEncoder();
     }
@@ -39,7 +36,7 @@ public class NettyAutoConfiguration {
     @Bean
     public StringDecoder stringDecoder() {
         return new StringDecoder();
-    }*/
+    }
 
     @Bean
     public ChannelInitializer channelInitializer(List<ChannelHandler> channelHandlers) {
@@ -52,12 +49,9 @@ public class NettyAutoConfiguration {
         b.group(bossGroup(), workerGroup())
                 .channel(NioServerSocketChannel.class)
                 .handler(new LoggingHandler(LogLevel.DEBUG))
-                .childHandler(channelInitializer);
-        Map<ChannelOption<?>, Object> tcpChannelOptions = tcpChannelOptions();
-        Set<ChannelOption<?>> keySet = tcpChannelOptions.keySet();
-        for (ChannelOption option : keySet) {
-            b.option(option, tcpChannelOptions.get(option));
-        }
+                .childHandler(channelInitializer)
+                .option(ChannelOption.SO_BACKLOG, properties.getSoBacklog())
+                .childOption(ChannelOption.SO_KEEPALIVE, properties.isSoKeepAlive());
         return b;
     }
 
@@ -74,14 +68,6 @@ public class NettyAutoConfiguration {
     @Bean(name = "tcpSocketAddress")
     public InetSocketAddress tcpPort() {
         return new InetSocketAddress(properties.getPort());
-    }
-
-    @Bean(name = "tcpChannelOptions")
-    public Map<ChannelOption<?>, Object> tcpChannelOptions() {
-        Map<ChannelOption<?>, Object> options = new HashMap<>();
-        //options.put(ChannelOption.SO_KEEPALIVE, properties.isSoKeepAlive());
-        options.put(ChannelOption.SO_BACKLOG, properties.getSoBacklog());
-        return options;
     }
 
     @Bean

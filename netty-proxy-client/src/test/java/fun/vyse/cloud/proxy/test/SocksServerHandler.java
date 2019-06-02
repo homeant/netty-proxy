@@ -1,6 +1,5 @@
 package fun.vyse.cloud.proxy.test;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.handler.codec.socks.*;
@@ -15,19 +14,19 @@ public class SocksServerHandler extends SimpleChannelInboundHandler<SocksRequest
         log.debug("type:{}", socksRequest.requestType());
         switch (socksRequest.requestType()) {
             case INIT:
-                log.info("localserver init");
+                log.info("local server init");
                 ctx.pipeline().addFirst(new SocksCmdRequestDecoder());
                 ctx.write(new SocksInitResponse(SocksAuthScheme.NO_AUTH));
                 break;
             case AUTH:
-                log.info("localserver auth");
+                log.info("local server auth");
                 ctx.pipeline().addFirst(new SocksCmdRequestDecoder());
                 ctx.write(new SocksAuthResponse(SocksAuthStatus.SUCCESS));
                 break;
             case CMD:
                 SocksCmdRequest req = (SocksCmdRequest) socksRequest;
                 if (req.cmdType() == SocksCmdType.CONNECT) {
-                    log.info("localserver connect");
+                    log.info("local server connect");
                     ctx.pipeline().addLast(new ServerConnectHandler());
                     ctx.pipeline().remove(this);
                     ctx.fireChannelRead(socksRequest);
